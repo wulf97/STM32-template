@@ -1,0 +1,45 @@
+#####################################################################################################
+# gcc utils
+CC := arm-none-eabi-gcc
+ASM := arm-none-eabi-as
+AR := arm-none-eabi-ar
+OBJCOPY := arm-none-eabi-objcopy
+SIZE := arm-none-eabi-size
+
+#####################################################################################################
+CPU = -mcpu=cortex-m4
+FPU = -mfpu=fpv4-sp-d16
+FLOAT-ABI = -mfloat-abi=hard
+
+MPU = $(CPU) $(FPU) $(FLOAT-ABI)
+#####################################################################################################
+# stlink utils
+FLASH := st-flash
+
+#####################################################################################################
+# Compile flags
+
+CFLAGS := $(MPU) -mthumb -Wall
+ASFLAGS := $(MPU) -mthumb
+LDFLAGS := $(CFLAGS) --specs=nosys.specs
+
+#####################################################################################################
+# Target name of firmware file
+TARGET := rtos
+
+#####################################################################################################
+# Target directory where build files will be
+BUILD_DIR := ../4-build
+
+#####################################################################################################
+# Target directory where object files will be
+OBJ_DIR := $(BUILD_DIR)/obj
+LIB_DIR := $(BUILD_DIR)/lib
+
+#####################################################################################################
+# Select name of boot file programm, that in boot directory
+BOOT := startup_stm32f401xc.s
+
+#####################################################################################################
+# Select name of linker file, that in ld directory
+LD_MAP := stm32f401c.ld
